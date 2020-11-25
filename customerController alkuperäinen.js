@@ -15,17 +15,7 @@ module.exports =
     fetchAll: function(req, res){
       console.log("query (GET): ", req.query);
 
-      // let query = 'SELECT Avain, Nimi, Osoite, Postinro, Postitmp, Luontipvm, asty_avain FROM Asiakas';
-      console.log(req.query);
-
-      var nimi = req.query.nimi;
-      console.log(nimi);
-      // var osoite = req.query.osoite;
-      // var asiakastyyppi = req.query.asty;
-      var sql = "SELECT * FROM ASIAKAS WHERE 1=1";
-      sql = sql + " AND nimi like '" + nimi + "%'";
-      let query = sql;
-      console.log(sql);
+      let query = 'SELECT Avain, Nimi, Osoite, Postinro, Postitmp, Luontipvm, asty_avain FROM Asiakas';
 
       connection.query(query, function(error, results, fields){
             // error will be an Error if one occurred during the query
@@ -40,8 +30,8 @@ module.exports =
             else
             {
               // console.log("Data = " + JSON.stringify(results));
-              // console.log("Data = ", results);
-              // console.log("Data = " + results);
+              console.log("Data = ", results);
+              console.log("Data = " + results);
               res.statusCode = 200;
               // res.send(results);
               res.send({code: "OK", error_msg : "", data : results});

@@ -19,11 +19,15 @@ module.exports =
       console.log(req.query);
 
       var nimi = req.query.nimi;
-      console.log(nimi);
-      // var osoite = req.query.osoite;
-      // var asiakastyyppi = req.query.asty;
-      var sql = "SELECT * FROM ASIAKAS WHERE 1=1";
-      sql = sql + " AND nimi like '" + nimi + "%'";
+      var osoite = req.query.osoite;
+      var asiakastyyppi = req.query.asiakastyyppi;
+      var sql = "SELECT * FROM asiakas INNER JOIN asiakastyyppi ON asiakas.asty_avain=asiakastyyppi.avain WHERE 1=1";
+      if (nimi)
+        sql = sql + " AND nimi like '" + nimi + "%'";
+      if (osoite)
+        sql = sql + " AND osoite like '" + osoite + "%'";
+      if (asiakastyyppi)
+        sql = sql + " AND asty_avain=" + asiakastyyppi;
       let query = sql;
       console.log(sql);
 
@@ -40,7 +44,7 @@ module.exports =
             else
             {
               // console.log("Data = " + JSON.stringify(results));
-              // console.log("Data = ", results);
+              console.log("Data = ", results);
               // console.log("Data = " + results);
               res.statusCode = 200;
               // res.send(results);

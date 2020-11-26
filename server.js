@@ -5,6 +5,7 @@ var app=express();
 // npm install body-parser
 var bodyParser = require('body-parser');
 var customerController = require('./customerController');
+var customerTypeController = require('./customerTypeController');
 
 const hostname = '127.0.0.1';
 const port = process.env.PORT || 3001;
@@ -35,6 +36,10 @@ app.route('/Asiakas/:id')
     .put(customerController.update)
     .delete(customerController.delete)
     .get(customerController.fetchOne);
+
+// REST API Asiakastyyppi
+app.route('/Asiakastyyppi')
+    .get(customerTypeController.fetchAll);
 //
 
 app.route('/task')

@@ -15,22 +15,7 @@ module.exports =
     fetchAll: function(req, res){
       console.log("query (GET): ", req.query);
 
-      // let query = 'SELECT Avain, Nimi, Osoite, Postinro, Postitmp, Luontipvm, asty_avain FROM Asiakas';
-      console.log(req.query);
-
-      var nimi = req.query.nimi;
-      var osoite = req.query.osoite;
-      var asiakastyyppi = req.query.asiakastyyppi;
-      var sql = "SELECT * FROM asiakas INNER JOIN asiakastyyppi ON asiakas.asty_avain=asiakastyyppi.avain WHERE 1=1";
-      if (nimi)
-        sql = sql + " AND nimi like '" + nimi + "%'";
-      if (osoite)
-        sql = sql + " AND osoite like '" + osoite + "%'";
-      if (asiakastyyppi && asiakastyyppi !== 0)
-        sql = sql + " AND asty_avain=" + asiakastyyppi;
-      let query = sql;
-      console.log(sql);
-      
+      let query = 'SELECT * FROM asiakastyyppi WHERE 1=1';
 
       connection.query(query, function(error, results, fields){
             // error will be an Error if one occurred during the query
@@ -55,6 +40,7 @@ module.exports =
         console.log("select tehty!");
     },
 
+    // Alla olevia ei ole testattu
     fetchOne: function(req, res){
 
       console.log("params (GET one): " + JSON.stringify(req.params));
